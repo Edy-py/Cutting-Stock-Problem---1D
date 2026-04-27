@@ -151,11 +151,11 @@ if st.button("🚀 Iniciar Otimização IA") and st.session_state.demandas:
 
         # 2. IA GA Solver via Pymoo
         problem = ProblemaCorte(pecas_sistema, tamanho_barra)
-        algorithm = NSGA2(pop_size=100, sampling=FloatRandomSampling(), 
+        algorithm = NSGA2(pop_size=200, sampling=FloatRandomSampling(), 
                           crossover=SBX(prob=0.9, eta=15), 
-                          mutation=PolynomialMutation(prob=0.05, eta=20))
+                          mutation=PolynomialMutation(prob=0.1, eta=15))
         
-        res = minimize(problem, algorithm, ('n_gen', 60), seed=42)
+        res = minimize(problem, algorithm, ('n_gen', 150), seed=42)
         
         # Extração segura do resultado
         val_ga = int(np.ravel(res.F)[0])
